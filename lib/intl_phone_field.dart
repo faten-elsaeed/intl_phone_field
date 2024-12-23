@@ -251,6 +251,7 @@ class IntlPhoneField extends StatefulWidget {
 
   ///
   final bool flagsOnSuffix;
+  final TextDirection? flagButtonDirectionality;
 
   const IntlPhoneField({
     Key? key,
@@ -301,6 +302,7 @@ class IntlPhoneField extends StatefulWidget {
     this.flagsButtonMargin = EdgeInsets.zero,
     this.magnifierConfiguration,
     this.flagsOnSuffix = false,
+    this.flagButtonDirectionality,
   }) : super(key: key);
 
   @override
@@ -473,7 +475,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
-              textDirection:  widget.flagsOnSuffix ? TextDirection.ltr : TextDirection.rtl,
+              textDirection: widget.flagButtonDirectionality,
               children: <Widget>[
                 const SizedBox(
                   width: 4,
