@@ -503,6 +503,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                   child: Text(
                     '+${_selectedCountry.dialCode}',
                     style: widget.dropdownTextStyle,
+                    textDirection: TextDirection.ltr,
                   ),
                 ),
                 if (widget.enabled &&
