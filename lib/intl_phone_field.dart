@@ -473,6 +473,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
+              textDirection:  widget.flagsOnSuffix ? TextDirection.ltr : TextDirection.rtl,
               children: <Widget>[
                 const SizedBox(
                   width: 4,

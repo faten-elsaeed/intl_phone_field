@@ -53,21 +53,26 @@ class _MyAppState extends State<MyApp> {
                 SizedBox(
                   height: 10,
                 ),
-                IntlPhoneField(
-                  focusNode: focusNode,
-                  decoration: InputDecoration(
-                    labelText: 'Phone Number',
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(),
+                Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: IntlPhoneField(
+                    focusNode: focusNode,
+                    flagsOnSuffix: true,
+                    textAlign: TextAlign.left,
+                    decoration: InputDecoration(
+                      labelText: 'Phone Number',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(),
+                      ),
                     ),
+                    languageCode: "en",
+                    onChanged: (phone) {
+                      print(phone.completeNumber);
+                    },
+                    onCountryChanged: (country) {
+                      print('Country changed to: ' + country.name);
+                    },
                   ),
-                  languageCode: "en",
-                  onChanged: (phone) {
-                    print(phone.completeNumber);
-                  },
-                  onCountryChanged: (country) {
-                    print('Country changed to: ' + country.name);
-                  },
                 ),
                 SizedBox(
                   height: 10,
