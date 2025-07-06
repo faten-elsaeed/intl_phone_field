@@ -252,6 +252,8 @@ class IntlPhoneField extends StatefulWidget {
   ///
   final bool flagsOnSuffix;
   final TextDirection? flagButtonDirectionality;
+  final double? flagSize;
+  final bool pinFlag;
 
   const IntlPhoneField({
     Key? key,
@@ -303,6 +305,8 @@ class IntlPhoneField extends StatefulWidget {
     this.magnifierConfiguration,
     this.flagsOnSuffix = false,
     this.flagButtonDirectionality,
+    this.flagSize,
+    this.pinFlag = false,
   }) : super(key: key);
 
   @override
@@ -334,17 +338,14 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
       number = number.replaceFirst(
           RegExp("^${_selectedCountry.fullCountryCode}"), "");
     } else {
-
-     // _selectedCountry = _countryList.firstWhere(
+      // _selectedCountry = _countryList.firstWhere(
       //   (item) => item.code == (widget.initialCountryCode ?? 'US'),
       //   orElse: () => _countryList.first,
       // );
       _selectedCountry = _countryList.firstWhere(
-            (item) => item.dialCode == (widget.initialCountryCode ?? '218'),
+        (item) => item.dialCode == (widget.initialCountryCode ?? '218'),
         orElse: () => _countryList.first,
       );
-
-      
 
       // remove country code from the initial number value
       if (number.startsWith('+')) {
@@ -477,7 +478,9 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         decoration: widget.dropdownDecoration,
         child: InkWell(
           borderRadius: widget.dropdownDecoration.borderRadius as BorderRadius?,
-          onTap: widget.enabled ? _changeCountry : null,
+          onTap: widget.pinFlag
+              ? null
+              : (widget.enabled ? _changeCountry : null),
           child: Padding(
             padding: widget.flagsButtonPadding,
             child: Row(
@@ -503,7 +506,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
                         )
                       : Text(
                           _selectedCountry.flag,
-                          style: const TextStyle(fontSize: 18),
+                          style: TextStyle(fontSize: widget.flagSize ?? 18),
                         ),
                   const SizedBox(width: 8),
                 ],
