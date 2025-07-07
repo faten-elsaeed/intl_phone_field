@@ -254,6 +254,7 @@ class IntlPhoneField extends StatefulWidget {
   final TextDirection? flagButtonDirectionality;
   final double? flagSize;
   final bool pinFlag;
+  final bool hideCounter;
 
   const IntlPhoneField({
     Key? key,
@@ -307,6 +308,7 @@ class IntlPhoneField extends StatefulWidget {
     this.flagButtonDirectionality,
     this.flagSize,
     this.pinFlag = false,
+    this.hideCounter = false,
   }) : super(key: key);
 
   @override
@@ -404,6 +406,13 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
   Widget build(BuildContext context) {
     return TextFormField(
       key: widget.formFieldKey,
+      buildCounter: widget.hideCounter
+          ? (context,
+                  {required currentLength,
+                  required isFocused,
+                  required maxLength}) =>
+              null
+          : null,
       initialValue: (widget.controller == null) ? number : null,
       autofillHints: widget.disableAutoFillHints
           ? null
@@ -478,9 +487,8 @@ class _IntlPhoneFieldState extends State<IntlPhoneField> {
         decoration: widget.dropdownDecoration,
         child: InkWell(
           borderRadius: widget.dropdownDecoration.borderRadius as BorderRadius?,
-          onTap: widget.pinFlag
-              ? null
-              : (widget.enabled ? _changeCountry : null),
+          onTap:
+              widget.pinFlag ? null : (widget.enabled ? _changeCountry : null),
           child: Padding(
             padding: widget.flagsButtonPadding,
             child: Row(
